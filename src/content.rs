@@ -4,6 +4,10 @@ extern crate reqwest;
 extern crate serde_json;
 extern crate urlencoding;
 
+// 之所以要用 self，是因为 extern crate xxx, 是把包导进当前 namespace，
+// 而 use 默认是用的绝对路径，而 main.rs 没有 extern crate xxx,
+// 所以 use 要使用当前路径的 xxx, 所以得加 self
+// 其他都不用加 self 是因为 main.rs 也导进了同样的包
 use self::regex::Regex;
 use cursive::theme::Effect;
 use cursive::utils::markup::StyledString;

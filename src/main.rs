@@ -15,10 +15,10 @@ use serde_json::Value;
 
 use clap::{App, Arg};
 
-pub mod content;
+mod content;
 use content::*;
 
-pub mod theme;
+mod theme;
 use theme::*;
 
 struct Configuration {
