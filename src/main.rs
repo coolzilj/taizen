@@ -86,10 +86,17 @@ fn parse_arguments() -> Configuration {
 
 fn search(s: &mut Cursive) {
     fn go(s: &mut Cursive, search: &str) {
+        match search {
+            "" => return pop_error(s, "Please enter something."),
+            _ => (),
+        }
         s.pop_layer();
-        let mut result = vec![];
+        let mut result: Vec<String> = vec![];
         match get_search_results(&search) {
-            Ok(x) => result = x,
+            Ok(x) => match x.len() {
+                0 => return pop_error(s, "Oops, found nothing."),
+                _ => result = x,
+            },
             Err(e) => pop_error(s, &handler(&e)),
         };
         let choose_result = SelectView::<String>::new()

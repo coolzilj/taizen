@@ -137,7 +137,13 @@ pub fn get_links(v: &Value) -> Result<Vec<String>, reqwest::Error> {
 }
 
 pub fn pop_error(s: &mut Cursive, msg: &str) {
-    s.add_layer(Dialog::text(msg.to_string()).button("Ok", |s| s.quit()));
+    s.add_layer(
+        Dialog::text(msg.to_string())
+            .button("Quit", |s| s.quit())
+            .button("Continue", |s| match s.pop_layer() {
+                _ => (),
+            }),
+    );
 }
 
 pub fn handler(e: &reqwest::Error) -> String {
